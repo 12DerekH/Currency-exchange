@@ -15,38 +15,23 @@ function App() {
 
   const currencyrateapi = "https://api.exchangerate-api.com/v4/latest/USD"; 
 
+  //Conrtolled by the 'Amount to Convert' input box
+  const [inputAmount,setInputAmount] = useState('0.00');
+  //Controlled by the 'From' drop-down
   const [inputCurrency,setInputCurrency] = useState('USD');
+  //Controlled by the 'To' drop-down
   const [outputCurrency,setOutputCurrency] = useState('USD');
-
-  
-  // for selecting different controls 
-  
-  var search = document.querySelector(".searchBox"); 
-  
-  var convert = document.querySelector(".convert"); 
-  
-  var fromCurrecy = document.querySelector(".from"); 
-  
-  var toCurrecy = document.querySelector(".to"); 
-  
-  var finalValue = document.querySelector(".finalValue"); 
-  
-  var finalAmount = document.getElementById("finalAmount"); 
-  
-  var resultFrom; 
-  
-  var resultTo; 
-  
-  var searchValue; 
+  //Contains resulting converted amount from api
+  const [finalAmount,setFinalAmount] = useState('0.00');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    alert(`The input currency is: ${inputCurrency}`)
+    alert(`The input currency is: ${inputCurrency}, the amount is: ${inputAmount}`)
   }
 
   const clearVal = (event) => {
     event.preventDefault();
-    alert('Clear value')
+    setInputAmount(0.00)
   }
 
   return (
@@ -57,9 +42,10 @@ function App() {
 
           <label id="amount"> Amount to Convert :  </label> 
 
-          <input type="text" 
+          <input type="number" 
             className="form-control searchBox" 
-            placeholder="0.00" 
+            onChange={(e) => setInputAmount(e.target.value)}
+            value={inputAmount}
             id="amount"
           /> 
 
@@ -115,16 +101,15 @@ function App() {
 
           <button className="btn btn-primary convert m-2" type="submit"> Convert </button> 
 
+          <button className="btn btn-primary m-2" onClick={clearVal}> Reset </button> 
 
-          <button className="btn btn-primary m-2" 
-
-                  onClick={clearVal}> 
-
-            Reset 
-
-          </button> 
-
-          </div> 
+        </div> 
+          
+        <div>
+          <h2>Converted Amount : </h2>
+          <p>Test</p>
+        </div>
+          
       </form>
     </div>
   );
