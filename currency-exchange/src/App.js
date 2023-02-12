@@ -3,32 +3,41 @@ import './style.css';
 import {useState} from 'react'
 
 const options = [
-  { currency: 'USD'},
-  { currency: 'CAD'},
-  { currency: 'EUR'},
-  { currency: 'AUD'},
-  { currency: 'GBP'},
-  { currency: 'JPY'}
+  { currency: 'USD', value: 'usd'},
+  { currency: 'CAD', value: 'cad'},
+  { currency: 'EUR', value: 'eur'},
+  { currency: 'AUD', value: 'aud'},
+  { currency: 'GBP', value: 'gbp'},
+  { currency: 'JPY', value: 'jpy'}
 ]
 
 function App() {
 
-  const currencyrateapi = "https://api.exchangerate-api.com/v4/latest/USD"; 
-
   //Conrtolled by the 'Amount to Convert' input box
   const [inputAmount,setInputAmount] = useState('0.00');
   //Controlled by the 'From' drop-down
-  const [inputCurrency,setInputCurrency] = useState('USD');
+  const [inputCurrency,setInputCurrency] = useState('usd');
   //Controlled by the 'To' drop-down
-  const [outputCurrency,setOutputCurrency] = useState('USD');
+  const [outputCurrency,setOutputCurrency] = useState('usd');
   //Contains resulting converted amount from api
-  const [finalAmount,setFinalAmount] = useState('0.00');
+  const [finalAmount,setFinalAmount] = useState('Placeholder');
 
+  // Handles the Convert button
   const handleSubmit = (event) => {
     event.preventDefault();
-    alert(`The input currency is: ${inputCurrency}, the amount is: ${inputAmount}`)
+    //alert(`The input currency is: ${inputCurrency}, the amount is: ${inputAmount}`)
+
+    fetch(`https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${inputCurrency}.json`) 
+    .then(currency => currency.json())
+    .then(result => {
+      console.log(result);
+      var rate = result[inputCurrency][outputCurrency];
+      setFinalAmount(inputAmount * rate)
+    })
+    .catch(error => console.log('error',error)); 
   }
 
+  // Handles the reset button
   const clearVal = (event) => {
     event.preventDefault();
     setInputAmount(0.00)
@@ -64,7 +73,7 @@ function App() {
 
                   <select className="form from" value={inputCurrency} onChange={event => setInputCurrency(event.target.value)}>
                     {options.map((option) => (
-                      <option value={option.currency}>{option.currency}</option>
+                      <option value={option.value}>{option.currency}</option>
                     ))}
                   </select>
 
@@ -86,7 +95,7 @@ function App() {
 
                   <select className="form out" value={outputCurrency} onChange={event => setOutputCurrency(event.target.value)}>
                     {options.map((option) => (
-                      <option value={option.currency}>{option.currency}</option>
+                      <option value={option.value}>{option.currency}</option>
                     ))}
                   </select>
 
@@ -105,9 +114,9 @@ function App() {
 
         </div> 
           
-        <div>
+        <div className="finalAmount">
           <h2>Converted Amount : </h2>
-          <p>Test</p>
+          <p className="finalValue">{finalAmount}</p>
         </div>
           
       </form>
