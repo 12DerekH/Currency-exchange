@@ -20,18 +20,19 @@ function App() {
   //Controlled by the 'To' drop-down
   const [outputCurrency,setOutputCurrency] = useState('usd');
   //Contains resulting converted amount from api
-  const [finalAmount,setFinalAmount] = useState('Placeholder');
+  const [finalAmount,setFinalAmount] = useState('Result');
 
   // Handles the Convert button
   const handleSubmit = (event) => {
     event.preventDefault();
     //alert(`The input currency is: ${inputCurrency}, the amount is: ${inputAmount}`)
 
-    fetch(`https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${inputCurrency}.json`) 
+    fetch(`https://v6.exchangerate-api.com/v6/7979b19d337356ea2dbea1d6/latest/${inputCurrency}`) 
     .then(currency => currency.json())
     .then(result => {
-      console.log(result);
-      var rate = result[inputCurrency][outputCurrency];
+      //console.log(result.conversion_rates);
+      //var rate = result[inputCurrency][outputCurrency];
+      var rate = result.conversion_rates[outputCurrency.toUpperCase()];
       setFinalAmount(inputAmount * rate)
     })
     .catch(error => console.log('error',error)); 
