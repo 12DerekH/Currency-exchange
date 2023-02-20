@@ -1,6 +1,6 @@
 body { 
 
-    background-color: #BBDBFA; 
+    background-color:honeydew; 
 
     background-position: center; 
 
@@ -15,6 +15,9 @@ body {
 .heading { 
 
     font-family: 'italic', cursive; 
+    font-size: 100px;
+
+    color:lightcoral;
 
  
 
@@ -26,21 +29,21 @@ hr {
 
     border-top: 2px solid black; 
 
-    width: 40%; 
+    width: 30%; 
 
-    margin-bottom: 55px; 
+    margin-bottom: 45px; 
 } 
 
   
 .main { 
 
-    width: 50vw; 
+    width: 600px; 
 
     margin: auto; 
 
-    padding: 30px; 
+    padding: 20px; 
 
-    border-radius: 5px; 
+    border-radius: 4px; 
 
     background-color: rgba(0, 0, 0, 0.5); 
 
@@ -50,13 +53,15 @@ hr {
   
 label { 
 
-    font-size: 20px; 
+    font-size: 25px; 
 } 
 
   
 .btn { 
+    margin-top: 18px;
 
-    width: 200px; 
+    margin-right:50px;
+    width: 120px; 
 } 
 
   
@@ -64,21 +69,26 @@ label {
 
     font-family: 'italic', cursive; 
 
-    margin: 50px auto; 
+    margin: 10px auto; 
 } 
 
   
 
 .finalAmount h2 { 
 
-    font-size: 30px; 
+    font-size: 45px; 
+    margin-top: 15px;
 } 
 
   
 .finalValue { 
 
     font-family: 'italic', serif; 
-    font-size: 22px;
-    color: black; 
+    font-size: 45px;
+    color: lightcoral; 
+    margin-top: -20px;
 } 
+
+
+
 

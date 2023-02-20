@@ -16,11 +16,11 @@ function App() {
   //Conrtolled by the 'Amount to Convert' input box
   const [inputAmount,setInputAmount] = useState('0.00');
   //Controlled by the 'From' drop-down
-  const [inputCurrency,setInputCurrency] = useState('usd');
+  const [inputCurrency,setInputCurrency] = useState('USD');
   //Controlled by the 'To' drop-down
-  const [outputCurrency,setOutputCurrency] = useState('usd');
+  const [outputCurrency,setOutputCurrency] = useState('USD');
   //Contains resulting converted amount from api
-  const [finalAmount,setFinalAmount] = useState('Result');
+  const [finalAmount,setFinalAmount] = useState('---');
 
   // Handles the Convert button
   const handleSubmit = (event) => {
@@ -42,6 +42,10 @@ function App() {
   const clearVal = (event) => {
     event.preventDefault();
     setInputAmount(0.00)
+    setInputCurrency('USD')
+    setOutputCurrency('USD')
+    setFinalAmount('---')
+
   }
 
   return (
@@ -68,7 +72,7 @@ function App() {
 
                   <div className="input-group-prepend"> 
 
-                      <span className="input-group-text">From</span> 
+                      <p className="input-group-text">From</p> 
 
                   </div> 
 
@@ -90,7 +94,7 @@ function App() {
 
                   <div className="input-group-prepend"> 
 
-                      <span className="input-group-text">To</span> 
+                      <p className="input-group-text">To</p> 
 
                   </div> 
 
